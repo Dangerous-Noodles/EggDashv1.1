@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Box,
   Heading,
@@ -14,18 +14,20 @@ import {
   Header,
   useToast,
   CloseButton,
-} from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+  Select,
+} from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 
 export default function SignUp({ signedUp }) {
   const defaultState = {
-    firstname: "",
-    lastname: "",
-    addressnumber: "",
-    streetaddress: "",
-    zipcode: "",
-    username: "",
-    password: "",
+    firstname: '',
+    lastname: '',
+    addressnumber: '',
+    streetaddress: '',
+    zipcode: '',
+    username: '',
+    password: '',
+    type: '',
   };
 
   const [state, setState] = useState(defaultState);
@@ -79,8 +81,24 @@ export default function SignUp({ signedUp }) {
     });
   }
 
+  function typeChange(field) {
+    setState({
+      ...state,
+      type: field.target.value,
+    });
+  }
+
   function clicked() {
-    signedUp(state.firstname, state.lastname, state.addressnumber, state.streetaddress, state.zipcode, state.username, state.password);
+    signedUp(
+      state.firstname,
+      state.lastname,
+      state.addressnumber,
+      state.streetaddress,
+      state.zipcode,
+      state.username,
+      state.password,
+      state.type
+    );
   }
 
   const toast = useToast();
@@ -96,7 +114,7 @@ export default function SignUp({ signedUp }) {
           borderRadius="8px"
           padding="30px"
         >
-          <Link to={"/"}>
+          <Link to={'/'}>
             <CloseButton className="right" />
           </Link>
           <img
@@ -105,6 +123,12 @@ export default function SignUp({ signedUp }) {
             height="225px"
             margin="15px"
           />
+          <InputGroup>
+            <Select onChange={typeChange} placeholder="Select Type:">
+              <option value="Farmer">Farmer</option>
+              <option value="Consumer">Consumer</option>
+            </Select>
+          </InputGroup>
           <InputGroup mt="10px" width="sm">
             <InputLeftAddon children="First Name:" />
             <Input variant="filled" onChange={firstnameChange} />
@@ -133,7 +157,7 @@ export default function SignUp({ signedUp }) {
             <InputLeftAddon children="Password:" pr="20px" />
             <Input variant="filled" onChange={passwordChange} />
           </InputGroup>
-          <Link to={"/"}>
+          <Link to={'/'}>
             <Button
               mt="30px"
               mb="30px"
@@ -141,9 +165,9 @@ export default function SignUp({ signedUp }) {
               onClick={() => {
                 clicked();
                 toast({
-                  title: "Signed up.",
+                  title: 'Signed up.',
                   description: "We've created a new account for you.",
-                  status: "success",
+                  status: 'success',
                   duration: 5000,
                   isClosable: true,
                 });

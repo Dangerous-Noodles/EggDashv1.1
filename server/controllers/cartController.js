@@ -15,10 +15,11 @@ LEFT OUTER JOIN products AS p
 ON c.product_id = p.id) AS i
 LEFT JOIN customers AS cust
 ON i.custid = cust.id
-WHERE cust.email = '${email}';
-	`;
+WHERE cust.email = $1;
+  `;
+  const userCartValue = [email];
 
-  db.query(userCartQuery)
+  db.query(userCartQuery, userCartValue)
     .then((data) => {
       // console.log(`this is the data from the user's CART: `, data.rows);
       res.locals.userCart = data.rows;
@@ -40,9 +41,9 @@ WHERE cust.email = '${email}';
 cartController.addProductsUserCart = (req, res, next) => {
   const { customer_id, product_id, quantity } = req.body;
 
-  let addCart = `INSERT INTO cart (id, customer_id, product_id, quantity) VALUES (nextval('cart_sequence'), '${customer_id}', '${product_id}', '${quantity}')`;
-
-  db.query(addCart)
+  const addCart = `INSERT INTO cart (customer_id, product_id, quantity) VALUES ($1,$2,$3)`;
+  const cartValues = [customer_id, product_id, quantity];
+  db.query(addCart, cartValues)
     .then((data) => {
       // console.log(`this is the data from the user's CART: `, data.rows);
       res.locals.userCart = data.rows;
