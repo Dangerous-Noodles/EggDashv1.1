@@ -6,7 +6,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production nodemon server/server.js",
     "build": "cross-env NODE_ENV=production webpack",
-    "dev": "cross-env NODE_ENV=development concurrently \"webpack serve --open Chrome.exe\" \"nodemon server/server.js\""
+    "dev": "cross-env NODE_ENV=development concurrently \"webpack-dev-server --open Chrome.exe\" \"nodemon server/server.js\""
   },
   "nodemonConfig": {
     "ignore": [
@@ -30,13 +30,15 @@
     "react": "^16.2.0",
     "react-dom": "^16.3.1",
     "react-router-dom": "^5.2.0",
-    "webpack": "^4.29.3"
+    "webpack": "^4.29.3",
+    "webpack-serve": "^3.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@babel/plugin-transform-runtime": "^7.12.1",
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.5",
+    "@webpack-cli/serve": "^1.1.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.2.1",
     "babel-polyfill": "^6.26.0",
