@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Box,
   Heading,
@@ -14,17 +14,20 @@ import {
   Header,
   useToast,
   CloseButton,
-} from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+  InputRightElement,
+} from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 
 export default function LogIn({ loggedIn }) {
   const defaultState = {
-    name: "",
-    username: "",
-    password: "",
+    name: '',
+    username: '',
+    password: '',
   };
 
   const [state, setState] = useState(defaultState);
+  const [show, setShow] = React.useState(false);
+  const handleClick = () => setShow(!show);
 
   function usernameChange(field) {
     setState({
@@ -61,7 +64,7 @@ export default function LogIn({ loggedIn }) {
           borderRadius="8px"
           padding="30px"
         >
-          <Link to={"/"}>
+          <Link to={'/'}>
             <CloseButton className="right" />
           </Link>
           <img
@@ -76,9 +79,18 @@ export default function LogIn({ loggedIn }) {
           </InputGroup>
           <InputGroup mt="10px" width="sm">
             <InputLeftAddon children="Password:" pr="20px" />
-            <Input variant="filled" onChange={passwordChange} />
+            <Input
+              type={show ? 'text' : 'password'}
+              variant="filled"
+              onChange={passwordChange}
+            />
+            <InputRightElement width="4.5rem">
+              <Button h="1.75rem" size="sm" onClick={handleClick}>
+                {show ? 'Hide' : 'Show'}
+              </Button>
+            </InputRightElement>
           </InputGroup>
-          <Link to={"/"}>
+          <Link to={'/'}>
             <Button
               mt="30px"
               mb="30px"
@@ -87,17 +99,17 @@ export default function LogIn({ loggedIn }) {
                 let result = await clicked();
                 if (result) {
                   toast({
-                    title: "Logged in.",
-                    description: "You are now signed in!",
-                    status: "success",
+                    title: 'Logged in.',
+                    description: 'You are now signed in!',
+                    status: 'success',
                     duration: 5000,
                     isClosable: true,
                   });
                 } else {
                   toast({
-                    title: "Unsuccessful log in attempt.",
-                    description: "Invalid username or password.",
-                    status: "warning",
+                    title: 'Unsuccessful log in attempt.',
+                    description: 'Invalid username or password.',
+                    status: 'warning',
                     duration: 5000,
                     isClosable: true,
                   });
