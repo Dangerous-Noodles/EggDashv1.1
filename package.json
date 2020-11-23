@@ -4,9 +4,9 @@
   "description": "Scratch",
   "main": "./client/index.js",
   "scripts": {
-    "start": "NODE_ENV=production nodemon server/server.js",
-    "build": "NODE_ENV=production webpack",
-    "dev": "NODE_ENV=development nodemon ./server/server.js & webpack-dev-server --open"
+    "start": "cross-env NODE_ENV=production nodemon server/server.js",
+    "build": "cross-env NODE_ENV=production webpack",
+    "dev": "cross-env NODE_ENV=development concurrently \"webpack serve --open Chrome.exe\" \"nodemon server/server.js\""
   },
   "nodemonConfig": {
     "ignore": [
