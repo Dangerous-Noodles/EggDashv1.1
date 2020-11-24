@@ -1,11 +1,12 @@
 const express = require('express');
 const path = require('path');
-
+const passportSetUp = require('./OAuth/config/passport_setup')
 const app = express();
 
 const custRouter = require('./routes/cust');
 const productsRouter = require('./routes/products');
 const cartRouter = require('./routes/cart');
+const authRouters = require('../server/OAuth/routes/auth_routes');
 
 const port = 3000;
 
@@ -13,6 +14,7 @@ const port = 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+app.use('/auth', authRouters);
 // router for customer logins
 app.use('/cust', custRouter);
 
