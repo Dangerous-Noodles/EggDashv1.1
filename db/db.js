@@ -1,12 +1,15 @@
 const { Pool } = require('pg');
+const { URI } = require('../server/OAuth/config/keys').postgreSQL;
 
-const PG_URI =
-  'postgres://gvajvsqt:mZb_UBRu49_2Qtw3KYzaJ7CYJT7Q-5sP@rajje.db.elephantsql.com:5432/gvajvsqt';
+const pool = new Pool({
+  
+  connectionString: URI
+});
+// const PG_URI =
+//   'postgres://ndzalgxg:h49nn77jdN3Vq9r-ZE9W67QH3H5GYriO@suleiman.db.elephantsql.com:5432/ndzalgxg';
 
 // create a new pool here using the connection string above
-const pool = new Pool({
-  connectionString: PG_URI,
-});
+
 
 // Adding some notes about the database here will be helpful for future you or other developers.
 // Schema for the database can be found below:
@@ -17,7 +20,7 @@ const pool = new Pool({
 // This will be required in the controllers to be the access point to the database
 module.exports = {
   query: (text, params, callback) => {
-    console.log('executed query', text);
+    console.log('executed query -->', text);
     return pool.query(text, params, callback);
   },
 };
