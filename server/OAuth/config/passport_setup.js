@@ -1,0 +1,71 @@
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20');
+const keys = require('./keys') // secret keys/secrets
+/*
+to secure keys and secrets :: import from keys.js
+*/
+const db = require('../../../db/db');
+
+
+
+
+passport.use(
+  new GoogleStrategy({
+    //options for google strategy
+    //to get google secrets --> to console.developers.google.com and create project, enable API and enable Google+, create credentials (specify API) calling from web swerver with node, user data, (http://localhost:8080) for both oirgins and redirects, create ID, gives us client ID and secret
+    callbackURL: '/cust/google/redirect', // <-- make sure this route is correct via google API directions auth/google/redirect
+    clientID: keys.google.clientID, //'string from API',
+    clientSecret: keys.google.clientSecret //'string from API'
+  },
+    async (request, accessToken, refreshToken, profile, done) => {
+      try {
+        const text1 = `select exists(select * from customers where "accessToken" = '${profile.id}')`;
+        const text2 = `INSERT INTO customers(email, "accessToken") VALUES ('${profile.email}', '${profile.id}')`;
+        const response = await db.query(text1);
+        console.log('successful first query --> ', response);
+        if (!response.rows[0].exists) await db.query(text2);
+        //query to retrieve their cart
+        const cart = await db.query(`SELECT * FROM customers WHERE "accessToken" = '${profile.id}'`)
+        //`SELECT * FROM customers WHERE email='${email}'`
+        // console.log('here is the cart -->', cart);
+        res.locals.custInfo = cart.rows;
+        return done(null, profile);
+      } catch (e) {
+        console.log('error in passport', e);
+      }
+    }
+  )
+);
+    
+  
+  
+  
+  
+  
+  
+  
+  /*
+    (accessToken, refreshToken, profile, done) => {
+    //aToken gets access to user info
+    //rToken refreshes access Token
+    //profile is the information that passport brings back from google
+    //done is called when function is finished
+    //passport callback function 
+      console.log('passport callback function fired: ', profile);
+      //use profile info to add or login user 
+  }));
+
+/* async (request, accessToken, refreshToken, profile, done) => {
+    try {
+      const text1 = `select exists(select * from users where users.accesstoken = '${profile.id}')`;
+      const text2 = `INSERT INTO users(email, accesstoken) VALUES ('${profile.email}', '${profile.id}')`;
+      const response = await db.query(text1);
+      if (!response.rows[0].exists) await db.query(text2);
+      return done(null, profile);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+)
+);
+*/
