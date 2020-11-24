@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Box, Text, Image, Center, Heading, Badge } from "@chakra-ui/react";
-import Navbar from "./Navbar";
-import NavbarL from "./NavbarL";
-import NavbarC from "./NavbarC";
-import SignUp from "./SignUp";
-import Login from "./Login";
-import Markets from "./Markets";
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { Box, Text, Image, Center, Heading, Badge } from '@chakra-ui/react';
+import Navbar from './Navbar';
+import NavbarL from './NavbarL';
+import NavbarC from './NavbarC';
+import SignUp from './SignUp';
+import Login from './Login';
+import Markets from './Markets';
 
 function App() {
   const defaultState = {
@@ -17,7 +17,8 @@ function App() {
     address_zip: '',
     total: 0,
     id: '',
-    email: ''
+    email: '',
+    type: '',
   };
 
   const [state, setState] = useState(defaultState);
@@ -27,32 +28,38 @@ function App() {
   });
 
   function instantiateCart(cartObj) {
-    let currentCart = state.cart;
-    let newcartItem = [];
-    newcartItem.push( 1, cartObj.name, cartObj.price, cartObj.description, cartObj.productId)
+    const currentCart = state.cart;
+    const newcartItem = [];
+    newcartItem.push(
+      1,
+      cartObj.name,
+      cartObj.price,
+      cartObj.description,
+      cartObj.productId
+    );
     currentCart.push(newcartItem);
-    setState ({
+    setState({
       ...state,
-      cart: currentCart
-    })
+      cart: currentCart,
+    });
   }
 
   function unAuth() {
     setState({
       ...state,
-      verified: false
-    })
+      verified: false,
+    });
   }
 
   function removeCartItem(productName) {
     let newTotal = state.total;
-    let newCart = [];
-    //loop through all items in array
-    //if its not the product, we push into our new array
-    //else
-      //if the amount is 0, we simply don't add it to the new array
-      //if its not 0 then we decrement the amount and then add it
-      console.log('removeCartItem invoked')
+    const newCart = [];
+    // loop through all items in array
+    // if its not the product, we push into our new array
+    // else
+    // if the amount is 0, we simply don't add it to the new array
+    // if its not 0 then we decrement the amount and then add it
+    console.log('removeCartItem invoked');
     let removedOne = false;
     for (let i = 0; i < state.cart.length; i++) {
       if (state.cart[i][1] !== productName) {
@@ -62,10 +69,10 @@ function App() {
           newCart.push(state.cart[i]);
         } else {
           console.log('newTotal', newTotal);
-          console.log('state.cart[i][2]',state.cart[i][2]);
+          console.log('state.cart[i][2]', state.cart[i][2]);
           newTotal -= state.cart[i][2];
           console.log('should be 0', newTotal);
-          if (newTotal < .01) newTotal = 0;
+          if (newTotal < 0.01) newTotal = 0;
           if (state.cart[i][0] !== 1) {
             let currentQuant = state.cart[i][0];
             currentQuant -= 1;
@@ -81,16 +88,16 @@ function App() {
     setState({
       ...state,
       cart: newCart,
-      total: newTotal
-    })
+      total: newTotal,
+    });
   }
 
   function emptyCart() {
     setState({
       ...state,
       cart: [],
-      total: 0
-    })
+      total: 0,
+    });
     // const request = {
     //   method: "DELETE",
     //   headers: { "Content-Type": "application/json" },
@@ -106,11 +113,11 @@ function App() {
       let product = cart[i][1];
       let userId = state.id;
       const request = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ product, quant, userId }),
       };
-      const response = await fetch("/", request);
+      const response = await fetch('/', request);
       const data = await response.json();
     }
   }
@@ -133,20 +140,20 @@ function App() {
     setState({
       ...state,
       cart: current,
-      total: newTotal
+      total: newTotal,
     });
   }
 
   // This will be async.
   async function loggedIn(username, password) {
     const request = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: username, password: password }),
     };
-    const response = await fetch("/cust/login", request);
+    const response = await fetch('/cust/login', request);
     const data = await response.json();
-    console.log("this is data:", data);
+    console.log('this is data:', data);
     let toReturn = false;
 
     if (data) {
@@ -169,19 +176,21 @@ function App() {
     addSt,
     addZip,
     username,
-    password
+    password,
+    type
   ) {
     name = String(name);
     lastName = String(lastName);
-    addNum= Number(addNum);
+    addNum = Number(addNum);
     addSt = String(addSt);
     addZip = Number(addZip);
     username = String(username);
     password = String(password);
+    type = String(type);
 
     const request = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         first_name: name,
         last_name: lastName,
@@ -189,12 +198,13 @@ function App() {
         password: password,
         address_number: addNum,
         address_street: addSt,
-        address_zip: addZip
+        address_zip: addZip,
+        type: type,
       }),
     };
     const response = await fetch('/cust/signup', request);
     const data = await response.json();
-    console.log("this is data:", data);
+    console.log('this is data:', data);
     setState({
       ...state,
       verified: true,
@@ -202,6 +212,7 @@ function App() {
       address_street: addSt,
       address_zip: addZip,
       email: username,
+      type: type,
     });
   }
 
@@ -217,13 +228,37 @@ function App() {
                 <div>
                   {map.toggled ? (
                     <div>
-                      <NavbarL toggled={toggled} cart={state.cart} total={state.total} emptyCart={emptyCart} removeCartItem={removeCartItem} unAuth={unAuth}/>
-                      <Markets version={true} addToCart={addToCart} email={state.email} instantiateCart={instantiateCart}/>
+                      <NavbarL
+                        toggled={toggled}
+                        cart={state.cart}
+                        total={state.total}
+                        emptyCart={emptyCart}
+                        removeCartItem={removeCartItem}
+                        unAuth={unAuth}
+                      />
+                      <Markets
+                        version={true}
+                        addToCart={addToCart}
+                        email={state.email}
+                        instantiateCart={instantiateCart}
+                      />
                     </div>
                   ) : (
                     <div>
-                      <NavbarL toggled={toggled} cart={state.cart} total={state.total} emptyCart={emptyCart} removeCartItem={removeCartItem} unAuth={unAuth}/>
-                      <Markets version={false} addToCart={addToCart} email={state.email} instantiateCart={instantiateCart}/>
+                      <NavbarL
+                        toggled={toggled}
+                        cart={state.cart}
+                        total={state.total}
+                        emptyCart={emptyCart}
+                        removeCartItem={removeCartItem}
+                        unAuth={unAuth}
+                      />
+                      <Markets
+                        version={false}
+                        addToCart={addToCart}
+                        email={state.email}
+                        instantiateCart={instantiateCart}
+                      />
                     </div>
                   )}
                 </div>
@@ -255,18 +290,21 @@ function App() {
                   <br />
 
                   <Center>
-                    <Heading >
-                      Welcome to Egg Dash!
-                    </Heading>
+                    <Heading>Welcome to Egg Dash!</Heading>
                   </Center>
                   <br />
                   <Center>
-                    <Image width='80%' borderRadius='15px' src="https://www.wegmans.com/wp-content/uploads/1097052-hero-wegmans-organic-farm-1-2048x1032.jpg" />
+                    <Image
+                      width="80%"
+                      borderRadius="15px"
+                      src="https://www.wegmans.com/wp-content/uploads/1097052-hero-wegmans-organic-farm-1-2048x1032.jpg"
+                    />
                   </Center>
                   <br />
                   <Center>
                     <Text>
-                      We deliver organic, farm-fresh family meats and produce to any address, anytime.
+                      We deliver organic, farm-fresh family meats and produce to
+                      any address, anytime.
                     </Text>
                   </Center>
                   <Center>

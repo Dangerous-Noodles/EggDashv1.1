@@ -1,0 +1,100 @@
+{
+[1]     id: 2,
+[1]     name: 'Roast Chicken',
+[1]     description: 'A ready-to-eat roasted chicken. Perfect for dinner.',
+[1]     pictureurl: 'https://www.simplyrecipes.com/wp-content/uploads/2007/01/roast-chicken-carrots-sally-horiz-a-1800.jpg',
+[1]     type: 'meat',
+[1]     price: '7.99',
+[1]     farm_id: 1,
+[1]     quantity: 15
+[1]   },
+[1]   {
+[1]     id: 4,
+[1]     name: 'Ear of Corn',
+[1]     description: 'A large ear of sweet corn, Vermont-fresh.',
+[1]     pictureurl: 'https://previews.123rf.com/images/kovalevaka/kovalevaka1801/kovalevaka180100008/92687626-single-ear-of-corn-isolated-on-white-background-as-package-design-element.jpg',
+[1]     type: 'produce',
+[1]     price: '0.79',
+[1]     farm_id: 2,
+[1]     quantity: 20
+[1]   },
+[1]   {
+[1]     id: 6,
+[1]     name: 'Chicken Drumsticks',
+[1]     description: 'Drumsticks-only. Approximately 1.5 - 2 lbs.',
+[1]     pictureurl: 'https://farmerstoyou.com/images/products/gmo_free_chicken_drumsticks_1982.jpg',
+[1]     type: 'meat',
+[1]     price: '6.79',
+[1]     farm_id: 1,
+[1]     quantity: 10
+[1]   },
+[1]   {
+[1]     id: 7,
+[1]     name: 'Organic Purple Top Turnip',
+[1]     description: 'Freshly picked turnips.',
+[1]     pictureurl: 'https://farmerstoyou.com/images/products/organic_purple_top_turnip_259.jpg',
+[1]     type: 'produce',
+[1]     price: '6.49',
+[1]     farm_id: 2,
+[1]     quantity: 15
+[1]   },
+[1]   {
+[1]     id: 5,
+[1]     name: 'Gallon of Milk',
+[1]     description: 'One gallon of whole milk, pasteurized.',
+[1]     pictureurl: 'https://farmerstoyou.com/images/products/organic_whole_milk_432.jpg',
+[1]     type: 'dairy',
+[1]     price: '2.99',
+[1]     farm_id: 2,
+[1]     quantity: 20
+[1]   },
+[1]   {
+[1]     id: 3,
+[1]     name: 'Dozen Eggs',
+[1]     description: 'One dozen farm-fresh, organic eggs.',
+[1]     pictureurl: 'https://farmerstoyou.com/images/products/free_choice_ungraded_eggs_2162.jpg',
+[1]     type: 'other',
+[1]     price: '5.99',
+[1]     farm_id: 1,
+[1]     quantity: 10
+[1]   },
+[1]   {
+[1]     id: 8,
+[1]     name: 'Grassfed Delmonico Steak',
+[1]     description: "The Delmonico (or Rib Eye) Steak is the favorite of many. It is cut from the small end of the rib roast and it's considered the juiciest of all steaks.",
+[1]     pictureurl: 'https://farmerstoyou.com/images/products/organic_grass_fed_delmonico_steak_1046.jpg',
+[1]     type: 'meat',
+[1]     price: '18.25',
+[1]     farm_id: 2,
+[1]     quantity: 4
+[1]   },
+[1]   {
+[1]     id: 9,
+[1]     name: 'Spicy Italian Sausage',
+[1]     description: 'Not overly spicy, this Italian Sausage will stand up to any sauce or is great just plain.',
+[1]     pictureurl: 'https://farmerstoyou.com/images/products/hot_italian_sausage_204.jpg',
+[1]     type: 'meat',
+[1]     price: '13.49',
+[1]     farm_id: 2,
+[1]     quantity: 9
+[1]   },
+[1]   {
+[1]     id: 10,
+[1]     name: 'Organic Seeded Baguette',
+[1]     description: 'This is a baguette that has been rolled in a mixture of poppy, fennel, and certified organic sesame seeds.',
+[1]     pictureurl: 'https://farmerstoyou.com/images/products/bread_baguette_seeded_organic_160.jpg',
+[1]     type: 'other',
+[1]     price: '5.45',
+[1]     farm_id: 1,
+[1]     quantity: 9
+[1]   },
+[1]   {
+[1]     id: 1,
+[1]     name: 'Organic Carrots',
+[1]     description: "These carrots are crunchy and incredibly sweet.  We consider these 'juice carrots' as they are cosmetically imperfect.  ",
+[1]     pictureurl: 'https://farmerstoyou.com/images/products/organic_juice_carrots_503.jpg',
+[1]     type: 'produce',
+[1]     price: '0.99',
+[1]     farm_id: 2,
+[1]     quantity: 50
+[1]   }
