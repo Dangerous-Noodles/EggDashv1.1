@@ -18,8 +18,8 @@ custController.createUser = (req, res, next) => {
 
   console.log('this is the req.body for createUser:', req.body);
   // const signUp = `SELECT * FROM customers WHERE email='${email}'`;
-  const signUp = `INSERT INTO customers (first_name, last_name, email, password, address_number, address_street, address_zip)
-  VALUES ($1, $2, $3, $4, $5, $6, $7 )`;
+  const signUp = `INSERT INTO customers (first_name, last_name, email, password, address_number, address_street, address_zip, type)
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8 )`;
   const signUpValues = [
     first_name,
     last_name,
@@ -28,6 +28,7 @@ custController.createUser = (req, res, next) => {
     address_number,
     address_street,
     address_zip,
+    type,
   ];
   db.query(signUp, signUpValues)
     .then((data) => {

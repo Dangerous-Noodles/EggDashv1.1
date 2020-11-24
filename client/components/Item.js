@@ -37,7 +37,7 @@ export default function Item({ addToCart, productName, productDescription, produ
   const [state, setState] = useState(defaultState);
 
   function incQuant(field) {
-    console.log('pressed');
+    // console.log('pressed');
     let current = state.quantity;
     current += 1;
     setState({
@@ -48,7 +48,7 @@ export default function Item({ addToCart, productName, productDescription, produ
   }
 
   function decQuant(field) {
-    console.log('decreased');
+    // console.log('decreased');
     let current = state.quantity;
     current -= 1;
     setState({
