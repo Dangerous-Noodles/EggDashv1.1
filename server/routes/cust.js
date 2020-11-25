@@ -4,6 +4,7 @@ const router = express.Router();
 const passportSetup = require('../OAuth/config/passport_setup');
 
 const custController = require('../controllers/custController');
+const cookieController = require('../controllers/cookieController');
 // const cartController = require('../controllers/cartController');
 
 // customer signs up
@@ -13,7 +14,7 @@ router.post('/signup', custController.createUser, (req, res) => {
 });
 
 // customer signs in and cart loads 'get' request
-router.post('/login', custController.verifyCust, (req, res) => {
+router.post('/login', custController.verifyCust, cookieController.setCookie, (req, res) => {
   res.status(200).json(res.locals);
 });
 
