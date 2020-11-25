@@ -28,20 +28,10 @@ router.get(
 
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
   // console.log('This is res.locals', res.locals.isVerified);
-  res.locals.isVerified = true;
-  // res.locals.profile = profile
-  // console.log('and now it is: ', res.locals.isVerified);
-  // res.locals.custInfo = data.rows;
-  //res.redirect('/cust/login');
-  console.log('this is profile --> ', req.user);
-  // console.log(profile)
-  // res.status(200).json({
-  //   user: req.user,
-  //   verified: true,
-  //   message: 'you log in with google'
-  // }).redirect('/') //<-- i wish
+  // res.locals.isVerified = true;
+  // console.log('this is profile --> ', req.user);
   res.cookie('success', true);
-  res.redirect('/'); //<-- i wish
+  res.redirect('/'); //<-- 
 });
 // // user modifies quantity in cart - 'put' request
 // router.put('/', custController.updateCustInfo, (req, res) => {});

@@ -41,22 +41,22 @@ passport.use(
 
         const response = await db.query(isUser);
         if (!response.rows[0].exists) await db.query(addNewUser);
-        //query to retrieve their cart
-        // await db.query(findUser);
-        //`SELECT * FROM customers WHERE email='${email}'`
-        // console.log('here is the cart -->', cart);
-        
-        //response.locals.custInfo = cart.rows
-        // .then((cart) => console.log(cart));
-        //res.locals.profile = profile
-        return done(null, profile); // <-- should this be profile instead of cart
+        return done(null, profile); // 
       } catch (e) {
         console.log('error in googlestrategy passport', e);
       };
     }
-  )
-);
+    )
+    );
     
+    //query to retrieve their cart
+    // await db.query(findUser);
+    //`SELECT * FROM customers WHERE email='${email}'`
+    // console.log('here is the cart -->', cart);
+    
+    //response.locals.custInfo = cart.rows
+    // .then((cart) => console.log(cart));
+    //res.locals.profile = profile
   
   
   
