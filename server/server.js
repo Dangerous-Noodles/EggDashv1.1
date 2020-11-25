@@ -3,16 +3,16 @@ const path = require('path');
 const custRouter = require('./routes/cust');
 const productsRouter = require('./routes/products');
 const cartRouter = require('./routes/cart');
-const cors = require('cors')
-const { cookieKey } = require('../server/OAuth/config/keys').session; 
+const cors = require('cors');
+const { cookieKey } = require('../server/OAuth/config/keys').session;
 const authRouters = require('../server/OAuth/routes/auth_routes');
-const passportSetUp = require('./OAuth/config/passport_setup')
+const passportSetUp = require('./OAuth/config/passport_setup');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 
 const app = express();
 const port = 3000;
-app.use(cors())
+app.use(cors());
 app.use(
   cookieSession({
     maxAge: 24 * 60 * 60 * 1000,
@@ -45,7 +45,8 @@ app.get('/*', (req, res) => {
 // default error handler
 app.use((err, req, res, next) => {
   const defaultErr = {
-    log: 'Express error handler caught unknown middleware error (default error handler)',
+    log:
+      'Express error handler caught unknown middleware error (default error handler)',
     status: 400,
     message: { err: 'An error occurred' },
   };
