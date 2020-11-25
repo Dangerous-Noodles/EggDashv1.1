@@ -1,9 +1,6 @@
-<<<<<<< HEAD
-import React, { useState } from "react";
-//import 
-=======
 import React, { useState } from 'react';
->>>>>>> main
+//import
+
 import {
   Box,
   Heading,
@@ -123,13 +120,18 @@ export default function LogIn({ loggedIn }) {
             >
               Sign In
             </Button>
-          
-            <Button mt="30px"
+
+            <Button
+              mt="30px"
               mb="30px"
               width="sm"
-              onClick={() => { window.location.href = '/cust/google' } }>Google </Button>
-          
-              </Link>
+              onClick={() => {
+                window.location.href = '/cust/google';
+              }}
+            >
+              Google{' '}
+            </Button>
+          </Link>
         </Flex>
       </Center>
     </Container>

@@ -1,22 +1,20 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
-const keys = require('./keys') // secret keys/secrets
+const keys = require('./keys'); // secret keys/secrets
 /*
 to secure keys and secrets :: import from keys.js
 */
 const db = require('../../../db/db');
 
-
-
-
 passport.use(
-  new GoogleStrategy({
-    //options for google strategy
-    //to get google secrets --> to console.developers.google.com and create project, enable API and enable Google+, create credentials (specify API) calling from web swerver with node, user data, (http://localhost:8080) for both oirgins and redirects, create ID, gives us client ID and secret
-    callbackURL: '/cust/google/redirect', // <-- make sure this route is correct via google API directions auth/google/redirect
-    clientID: keys.google.clientID, //'string from API',
-    clientSecret: keys.google.clientSecret //'string from API'
-  },
+  new GoogleStrategy(
+    {
+      //options for google strategy
+      //to get google secrets --> to console.developers.google.com and create project, enable API and enable Google+, create credentials (specify API) calling from web swerver with node, user data, (http://localhost:8080) for both oirgins and redirects, create ID, gives us client ID and secret
+      callbackURL: '/cust/google/redirect', // <-- make sure this route is correct via google API directions auth/google/redirect
+      clientID: keys.google.clientID, //'string from API',
+      clientSecret: keys.google.clientSecret, //'string from API'
+    },
     async (request, accessToken, refreshToken, profile, done) => {
       try {
         const text1 = `select exists(select * from customers where "accessToken" = '${profile.id}')`;
@@ -25,7 +23,9 @@ passport.use(
         console.log('successful first query --> ', response);
         if (!response.rows[0].exists) await db.query(text2);
         //query to retrieve their cart
-        const cart = await db.query(`SELECT * FROM customers WHERE "accessToken" = '${profile.id}'`)
+        const cart = await db.query(
+          `SELECT * FROM customers WHERE "accessToken" = '${profile.id}'`
+        );
         //`SELECT * FROM customers WHERE email='${email}'`
         // console.log('here is the cart -->', cart);
         res.locals.custInfo = cart.rows;
@@ -36,15 +36,8 @@ passport.use(
     }
   )
 );
-    
-  
-  
-  
-  
-  
-  
-  
-  /*
+
+/*
     (accessToken, refreshToken, profile, done) => {
     //aToken gets access to user info
     //rToken refreshes access Token

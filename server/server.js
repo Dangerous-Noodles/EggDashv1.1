@@ -25,7 +25,7 @@ app.use('/products', productsRouter);
 app.use('/cart', cartRouter);
 
 // router for Oauth
-app.use('/login');
+//app.use('/login');
 // serve index.html on the route '/'
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/index.html'));

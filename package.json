@@ -22,6 +22,7 @@
     "@chakra-ui/react": "^1.0.0",
     "@emotion/react": "^11.1.1",
     "@emotion/styled": "^11.0.0",
+    "axios": "^0.21.0",
     "browserify": "^10.2.4",
     "express": "^4.12.3",
     "framer-motion": "^2.9.4",
@@ -31,6 +32,7 @@
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.3.1",
+    "react-paypal-express-checkout": "^1.0.5",
     "react-router-dom": "^5.2.0",
     "webpack": "^4.29.3",
     "webpack-serve": "^3.2.0"
