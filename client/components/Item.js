@@ -37,7 +37,7 @@ export default function Item({ addToCart, productName, productDescription, produ
   const [state, setState] = useState(defaultState);
 
   function incQuant(field) {
-    console.log('pressed');
+    // console.log('pressed');
     let current = state.quantity;
     current += 1;
     setState({
@@ -48,7 +48,7 @@ export default function Item({ addToCart, productName, productDescription, produ
   }
 
   function decQuant(field) {
-    console.log('decreased');
+    // console.log('decreased');
     let current = state.quantity;
     current -= 1;
     setState({
@@ -95,11 +95,11 @@ export default function Item({ addToCart, productName, productDescription, produ
         <Text>${state.price}</Text>
       </Flex>
       <br />
-      <NumberInput size="sm" min={1} defaultValue={1} onChange={incQuant}>
+      <NumberInput size="sm" min={1} defaultValue={1} >
         <NumberInputField />
         <NumberInputStepper >
-          <NumberIncrementStepper/>
-          <NumberDecrementStepper/>
+          <NumberIncrementStepper onClick={incQuant}/>
+          <NumberDecrementStepper onClick={decQuant}/>
         </NumberInputStepper>
       </NumberInput>
       <br />

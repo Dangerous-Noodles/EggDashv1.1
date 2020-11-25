@@ -21,7 +21,7 @@ WHERE cust.email = $1;
 
   db.query(userCartQuery, userCartValue)
     .then((data) => {
-      // console.log(`this is the data from the user's CART: `, data.rows);
+      console.log(`this is the data from the user's CART: `, data.rows);
       res.locals.userCart = data.rows;
     })
     .then(next)

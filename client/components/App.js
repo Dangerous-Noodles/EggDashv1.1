@@ -70,9 +70,10 @@ function App() {
       cartObj.name,
       cartObj.price,
       cartObj.description,
-      cartObj.productId
+      cartObj.productId,
     );
     currentCart.push(newcartItem);
+    console.log('this is current cart ',currentCart);
     setState({
       ...state,
       cart: currentCart,
@@ -164,7 +165,16 @@ function App() {
 
   function addToCart(quantity, product, price, description, productId) {
     let current = state.cart;
-    current.push([quantity, product, price, description, productId]);
+    // Check if product is already in cart
+    let alreadyInCart=false;
+    for(let item of current){
+      if(product === item[1]){
+        item[0] += quantity;
+        alreadyInCart = true;
+      }
+    }
+
+    if(!alreadyInCart){current.push([quantity, product, price, description, productId]);}
     let newTotal = 0;
 
     for (let i = 0; i < current.length; i++) {
@@ -304,6 +314,8 @@ function App() {
               );
             }}
           />
+
+
           <Route
             path="/checkout"
             exact

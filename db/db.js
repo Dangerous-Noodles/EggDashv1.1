@@ -2,12 +2,11 @@ const { Pool } = require('pg');
 const { URI } = require('../server/OAuth/config/keys').postgreSQL;
 
 const pool = new Pool({
-  
-  connectionString: URI
+  connectionString: URI,
 });
 // const PG_URI =
 //   'postgres://ndzalgxg:h49nn77jdN3Vq9r-ZE9W67QH3H5GYriO@suleiman.db.elephantsql.com:5432/ndzalgxg';
-
+//    'postgres://gvajvsqt:mZb_UBRu49_2Qtw3KYzaJ7CYJT7Q-5sP@rajje.db.elephantsql.com:5432/gvajvsqt';
 // create a new pool here using the connection string above
 
 
