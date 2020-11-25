@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useHistory,
+} from 'react-router-dom';
 
-import { CookiesProvider, withCookies } from 'react-cookie';
+import { useCookies } from 'react-cookie';
 
 import { Box, Text, Image, Center, Heading, Badge } from '@chakra-ui/react';
 import Navbar from './Navbar';
@@ -10,7 +16,7 @@ import NavbarC from './NavbarC';
 import SignUp from './SignUp';
 import Login from './Login';
 import Markets from './Markets';
-import axios from "axios"
+import axios from 'axios';
 
 // GENERAL REFACTOR NOTE:
 /*
@@ -37,22 +43,24 @@ function App() {
     type: '',
   };
   // TODO: instead of trying to fetch the auth route, just check for the existence of the session cookie.
-  
+
   /**
    //moved Jiaxin's useEffect function to bottom
    // http://localhost:8080/cust/google/redirect
  
  */
   const [state, setState] = useState(defaultState);
-  
+
   const [cookies, setCookie, removeCookie] = useCookies();
   const [map, setMap] = useState({
     toggled: false,
   });
 
-  useEffect(() => {console.log(cookies.getAll()) }, []);
-//update verify state
-//
+  useEffect(() => {
+    setState({ ...state, verified: cookies.success });
+  }, []);
+  //update verify state
+  //
 
   function instantiateCart(cartObj) {
     const currentCart = state.cart;
@@ -175,7 +183,7 @@ function App() {
   async function loggedIn(username, password) {
     const request = {
       method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: username, password: password }),
     };
     const response = await fetch('/cust/login', request);
@@ -194,11 +202,9 @@ function App() {
     }
     return toReturn;
   }
-//   async function googled(
-//     window.location.href = '/cust/google'
-// )
-
-
+  //   async function googled(
+  //     window.location.href = '/cust/google'
+  // )
 
   // This will be async.
   async function signedUp(
@@ -237,7 +243,7 @@ function App() {
     const response = await fetch('/cust/signup', request);
     const data = await response.json();
 
-  // TODO: restructure this router. get rid of the conditional rendering of 2 separate '/' Routes
+    // TODO: restructure this router. get rid of the conditional rendering of 2 separate '/' Routes
     setState({
       ...state,
       verified: true,
@@ -375,7 +381,7 @@ function App() {
   );
 }
 
-export default withCookies(App);
+export default App;
 
 //logged out function invoked {
 //   loop through our cart
