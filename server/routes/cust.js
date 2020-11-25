@@ -17,6 +17,10 @@ router.post('/login', custController.verifyCust, (req, res) => {
   res.status(200).json(res.locals);
 });
 
+// router.post('/google', custController.oAuth, (req, res) => {
+//   res.status(200).json(res.locals);
+// });
+
 // customer deletes their login (Stretch feature)
 // router.delete('/', custController.deleteUser, (req, res) => {});
 router.get(
