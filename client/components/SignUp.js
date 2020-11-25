@@ -97,7 +97,7 @@ export default function SignUp({ signedUp }) {
       state.zipcode,
       state.username,
       state.password,
-      state.type
+      state.type,
     );
   }
 
@@ -124,9 +124,10 @@ export default function SignUp({ signedUp }) {
             margin="15px"
           />
           <InputGroup>
-            <Select onChange={typeChange} placeholder="Select Type:">
+          <InputLeftAddon children="Select type:" />
+            <Select onChange={typeChange} variant="filled" defaultValue="Consumer">
               <option value="Farmer">Farmer</option>
-              <option value="Consumer">Consumer</option>
+              <option value="Consumer" >Consumer</option>
             </Select>
           </InputGroup>
           <InputGroup mt="10px" width="sm">

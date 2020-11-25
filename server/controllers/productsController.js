@@ -23,4 +23,28 @@ productsController.getAllProducts = (req, res, next) => {
     });
 };
 
+productsController.decrementProducts = (req, res, next) => {
+  const decProducts = `UPDATE products SET quantity = $2 WHERE products.name = $1`;
+  const values = [req.body[0], req.body[1]];
+  console.log(
+    'This hit the decrementProducts controller',
+    req.body[0],
+    req.body[1]
+  );
+  db.query(decProducts, values)
+    .then((data) => {
+      res.locals.products = data.rows;
+    })
+    .then(next)
+    .catch(() => {
+      next({
+        log: `productsController.decrementProducts: ERROR: Error decrementing purchase quantity from the DB.`,
+        message: {
+          err:
+            'Error occurred in productController.decrementProducts. Check server logs for more details.',
+        },
+      });
+    });
+};
+
 module.exports = productsController;

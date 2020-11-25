@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-import React, { useState } from "react";
-//import 
-=======
 import React, { useState } from 'react';
->>>>>>> main
 import {
   Box,
   Heading,

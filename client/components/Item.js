@@ -95,11 +95,11 @@ export default function Item({ addToCart, productName, productDescription, produ
         <Text>${state.price}</Text>
       </Flex>
       <br />
-      <NumberInput size="sm" min={1} defaultValue={1} onChange={incQuant}>
+      <NumberInput size="sm" min={1} defaultValue={1} >
         <NumberInputField />
         <NumberInputStepper >
-          <NumberIncrementStepper/>
-          <NumberDecrementStepper/>
+          <NumberIncrementStepper onClick={incQuant}/>
+          <NumberDecrementStepper onClick={decQuant}/>
         </NumberInputStepper>
       </NumberInput>
       <br />
