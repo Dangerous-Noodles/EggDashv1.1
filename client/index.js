@@ -1,15 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-import {
-  ChakraProvider,
-  extendTheme
-} from "@chakra-ui/react";
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+import { CookiesProvider } from 'react-cookie';
 import App from './components/App';
 import './styles/styles.css';
 
@@ -17,20 +10,21 @@ import './styles/styles.css';
 
 const colors = {
   brand: {
-    900: "#1a365d",
-    800: "#153e75",
-    700: "#2a69ac",
+    900: '#1a365d',
+    800: '#153e75',
+    700: '#2a69ac',
   },
-}
+};
 
-const theme = extendTheme({ colors })
+const theme = extendTheme({ colors });
 
 render(
   <Router>
-    <ChakraProvider theme={theme}>
-      <App />
-    </ChakraProvider>
+    <CookiesProvider>
+      <ChakraProvider theme={theme}>
+        <App />
+      </ChakraProvider>
+    </CookiesProvider>
   </Router>,
   document.getElementById('root')
 );
-

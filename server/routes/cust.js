@@ -26,11 +26,16 @@ router.post('/login', custController.verifyCust, (req, res) => {
 router.get(
   '/google',
   passport.authenticate('google', {
-    scope: ['profile'],
+    scope: ['email', 'profile'],
   })
 );
+
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-  res.status(200).json(res.locals);
+  // console.log('This is res.locals', res.locals.isVerified);
+  // res.locals.isVerified = true;
+  // console.log('this is profile --> ', req.user);
+  res.cookie('success', true);
+  res.redirect('/'); //<-- 
 });
 // // user modifies quantity in cart - 'put' request
 // router.put('/', custController.updateCustInfo, (req, res) => {});

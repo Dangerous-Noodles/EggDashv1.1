@@ -1,5 +1,14 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useHistory,
+} from 'react-router-dom';
+
+import { useCookies } from 'react-cookie';
+
 import { Box, Text, Image, Center, Heading, Badge } from '@chakra-ui/react';
 import Navbar from './Navbar';
 import NavbarL from './NavbarL';
@@ -7,8 +16,20 @@ import NavbarC from './NavbarC';
 import SignUp from './SignUp';
 import Login from './Login';
 import Markets from './Markets';
+import axios from 'axios';
+
+// GENERAL REFACTOR NOTE:
+/*
+  Try to break all these callbacks like 'logOut' 'removeCartItem' 'signedUp' into different files.
+  EX: Put all the functions related to authentication into an auth.js, all the market related functions into a market.js
+*/
 
 function App() {
+  // REFACTOR OPPURTUNITY: Break the state into multiple `useState` calls. (maybe one for auth, user, and market info)
+  //                       One of the differences between hooks vs. class components
+  //                       is that class components have their state in one object,
+  //                       but functional components and hooks let you split it up into more
+  //                       granular bits.
   const defaultState = {
     verified: false,
     cart: [],
@@ -18,14 +39,28 @@ function App() {
     total: 0,
     id: '',
     email: '',
+    user: {},
     type: '',
   };
+  // TODO: instead of trying to fetch the auth route, just check for the existence of the session cookie.
 
+  /**
+   //moved Jiaxin's useEffect function to bottom
+   // http://localhost:8080/cust/google/redirect
+ 
+ */
   const [state, setState] = useState(defaultState);
 
+  const [cookies, setCookie, removeCookie] = useCookies();
   const [map, setMap] = useState({
     toggled: false,
   });
+
+  useEffect(() => {
+    setState({ ...state, verified: cookies.success });
+  }, []);
+  //update verify state
+  //
 
   function instantiateCart(cartObj) {
     const currentCart = state.cart;
@@ -177,6 +212,9 @@ function App() {
     }
     return toReturn;
   }
+  //   async function googled(
+  //     window.location.href = '/cust/google'
+  // )
 
   // This will be async.
   async function signedUp(
@@ -214,7 +252,8 @@ function App() {
     };
     const response = await fetch('/cust/signup', request);
     const data = await response.json();
-    console.log('this is data:', data);
+
+    // TODO: restructure this router. get rid of the conditional rendering of 2 separate '/' Routes
     setState({
       ...state,
       verified: true,
@@ -361,3 +400,37 @@ export default App;
 //   for every item in our cart it will make a request to the server with the cart item in the body
 // }
 // req.body
+/*
+useEffect(() => {
+    console.log('in the component did mount')
+    fetch("http://localhost:8080/cust/google/redirect", {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        // "Access-Control-Allow-Credentials": true
+      },
+      mode: "no-cors",
+    })
+      .then(response => {
+        if (response.status === 200) return response.json();
+        throw new Error("failed to authenticate user");
+      })
+      .then(responseJson => {
+        console.log(responseJson)
+        setState({
+          ...state,
+          authenticated: true,
+          user: responseJson.user
+        });
+      })
+      .catch(error => {
+       setState({
+         ...state,
+          authenticated: false,
+          error: "Failed to authenticate user"
+        });
+      });
+  }, []);
+  */

@@ -10,5 +10,8 @@ module.exports = {
   postgreSQL: {
     URI: 'postgres://ndzalgxg:h49nn77jdN3Vq9r-ZE9W67QH3H5GYriO@suleiman.db.elephantsql.com:5432/ndzalgxg'
   }, 
+  session: {
+    cookieKey: "eggySecretKey"
+  }
   //PostgreSQL URI?
 };

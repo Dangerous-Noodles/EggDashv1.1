@@ -6,7 +6,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production nodemon server/server.js",
     "build": "cross-env NODE_ENV=production webpack",
-    "dev": "cross-env NODE_ENV=development concurrently \"webpack-dev-server --open Chrome.exe\" \"nodemon server/server.js\""
+    "dev": "cross-env NODE_ENV=development concurrently \"webpack-dev-server --open\" \"nodemon server/server.js\""
   },
   "nodemonConfig": {
     "ignore": [
@@ -18,11 +18,15 @@
   "license": "None",
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
+    "@babel/runtime": "^7.12.5",
     "@chakra-ui/core": "^0.8.0",
     "@chakra-ui/react": "^1.0.0",
     "@emotion/react": "^11.1.1",
     "@emotion/styled": "^11.0.0",
+    "axios": "^0.21.0",
     "browserify": "^10.2.4",
+    "cookie-session": "^1.4.0",
+    "cors": "^2.8.5",
     "express": "^4.12.3",
     "framer-motion": "^2.9.4",
     "passport": "^0.4.1",
@@ -30,6 +34,7 @@
     "pg": "^8.5.1",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
+    "react-cookie": "^4.0.3",
     "react-dom": "^16.3.1",
     "react-router-dom": "^5.2.0",
     "webpack": "^4.29.3",
