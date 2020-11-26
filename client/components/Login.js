@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+//import
+
 import {
   Box,
   Heading,
@@ -135,6 +137,7 @@ export default function LogIn({ loggedIn }) {
             >
               Sign In
             </Button>
+<<<<<<< HEAD
             </Link>
           
             <Button mt="30px"
@@ -146,6 +149,20 @@ export default function LogIn({ loggedIn }) {
              
 
 
+=======
+
+            <Button
+              mt="30px"
+              mb="30px"
+              width="sm"
+              onClick={() => {
+                window.location.href = '/cust/google';
+              }}
+            >
+              Google{' '}
+            </Button>
+          </Link>
+>>>>>>> paypal
         </Flex>
       </Center>
     </Container>

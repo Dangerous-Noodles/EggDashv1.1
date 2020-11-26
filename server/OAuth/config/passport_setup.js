@@ -1,6 +1,6 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
-const keys = require('./keys') // secret keys/secrets
+const keys = require('./keys'); // secret keys/secrets
 /*
 to secure keys and secrets :: import from keys.js
 */
@@ -12,8 +12,8 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-    console.log('this is id --> ', id)
-    const text = `SELECT * FROM customers WHERE "accessToken"='${id}'`; //maybe should be customers.id instead of customers.accessToken? 
+    console.log('this is id --> ', id);
+    const text = `SELECT * FROM customers WHERE "accessToken"='${id}'`; //maybe should be customers.id instead of customers.accessToken?
     const { rows } = await db.query(text);
     const user = rows;
     console.log(user);
@@ -24,13 +24,14 @@ passport.deserializeUser(async (id, done) => {
 });
 
 passport.use(
-  new GoogleStrategy({
-    //options for google strategy
-    //to get google secrets --> to console.developers.google.com and create project, enable API and enable Google+, create credentials (specify API) calling from web swerver with node, user data, (http://localhost:8080) for both oirgins and redirects, create ID, gives us client ID and secret
-    callbackURL: '/cust/google/redirect', // <-- make sure this route is correct via google API directions auth/google/redirect
-    clientID: keys.google.clientID, //'string from API',
-    clientSecret: keys.google.clientSecret //'string from API'
-  },
+  new GoogleStrategy(
+    {
+      //options for google strategy
+      //to get google secrets --> to console.developers.google.com and create project, enable API and enable Google+, create credentials (specify API) calling from web swerver with node, user data, (http://localhost:8080) for both oirgins and redirects, create ID, gives us client ID and secret
+      callbackURL: '/cust/google/redirect', // <-- make sure this route is correct via google API directions auth/google/redirect
+      clientID: keys.google.clientID, //'string from API',
+      clientSecret: keys.google.clientSecret, //'string from API'
+    },
     async (request, accessToken, refreshToken, profile, done) => {
       try {
         const isUser = `select exists(select * from customers where "accessToken" = '${profile.id}')`;
@@ -41,30 +42,24 @@ passport.use(
 
         const response = await db.query(isUser);
         if (!response.rows[0].exists) await db.query(addNewUser);
-        return done(null, profile); // 
+        return done(null, profile); //
       } catch (e) {
         console.log('error in googlestrategy passport', e);
-      };
+      }
     }
-    )
-    );
-    
-    //query to retrieve their cart
-    // await db.query(findUser);
-    //`SELECT * FROM customers WHERE email='${email}'`
-    // console.log('here is the cart -->', cart);
-    
-    //response.locals.custInfo = cart.rows
-    // .then((cart) => console.log(cart));
-    //res.locals.profile = profile
-  
-  
-  
-  
-  
-  
-  
-  /*
+  )
+);
+
+//query to retrieve their cart
+// await db.query(findUser);
+//`SELECT * FROM customers WHERE email='${email}'`
+// console.log('here is the cart -->', cart);
+
+//response.locals.custInfo = cart.rows
+// .then((cart) => console.log(cart));
+//res.locals.profile = profile
+
+/*
     (accessToken, refreshToken, profile, done) => {
     //aToken gets access to user info
     //rToken refreshes access Token

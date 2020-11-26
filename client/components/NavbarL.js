@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+<<<<<<< HEAD
+=======
+import axios from 'axios';
+>>>>>>> paypal
 import {
   Menu,
   MenuButton,
@@ -23,7 +27,11 @@ import {
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import CartItem from './CartItem';
+<<<<<<< HEAD
 
+=======
+import Paypal from './Paypal';
+>>>>>>> paypal
 export default function NavbarL(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
@@ -54,6 +62,17 @@ export default function NavbarL(props) {
   }
 
   //quantity, product, price, description
+  // connect to paypal
+  const transactionSuccess = (data) => {
+    let variables = {
+      cartDetail: cart,
+      payment: data,
+    };
+    axios
+      .post('/cust/successBuy', variables)
+      .then(console.log('successful put payment data in the database'));
+    //.then(emptyCart());
+  };
 
   return (
     <div className="navbarL">
@@ -72,13 +91,14 @@ export default function NavbarL(props) {
               <DrawerCloseButton />
               <DrawerHeader>Shopping Cart</DrawerHeader>
               <DrawerBody>{cartArray}</DrawerBody>
-
+              {/** put here above subtatol */}
               <DrawerFooter>
                 <Box mr="20px">
                   <Flex direction="column" justify="center" align="center">
                     <Badge colorScheme="red">Subtotal </Badge>${total}
                   </Flex>
                 </Box>
+
                 <Button variant="outline" mr={3} onClick={onClose}>
                   Cancel
                 </Button>
@@ -149,17 +169,33 @@ export default function NavbarL(props) {
                           emptyCart();
                         }
                       });
+
+                <Button
+                  color="blue"
+                  onClick={() => {
+                    toast({
+                      title: 'Purchased!',
+                      description: `You purchased $${total} worth of grocieries.`,
+                      status: 'error',
+                      duration: 5000,
+                      isClosable: true,
+                    });
+                    emptyCart();
                   }}
                 >
                   Checkout
                 </Button>
               </DrawerFooter>
+              <Box mr="20px">
+                <Flex direction="column" justify="center" align="center">
+                  <Paypal toPay={total} onSuccess={transactionSuccess} />
+                </Flex>
+              </Box>
             </DrawerContent>
           </DrawerOverlay>
         </Drawer>
       </>
 
-      {/*********************************************************************/}
       <Button onClick={() => toggled()} margin="15px" bg="#bedbbb">
         Map
       </Button>

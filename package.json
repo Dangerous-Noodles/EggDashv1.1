@@ -36,6 +36,7 @@
     "react": "^16.2.0",
     "react-cookie": "^4.0.3",
     "react-dom": "^16.3.1",
+    "react-paypal-express-checkout": "^1.0.5",
     "react-router-dom": "^5.2.0",
     "webpack": "^4.29.3",
     "webpack-serve": "^3.2.0"

@@ -37,6 +37,8 @@ app.use('/products', productsRouter);
 // router for shopping cart
 app.use('/cart', cartRouter);
 
+// router for Oauth
+//app.use('/login');
 // serve index.html on the route '/'
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/index.html'));
