@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-<<<<<<< HEAD
-=======
 import axios from 'axios';
->>>>>>> paypal
 import {
   Menu,
   MenuButton,
@@ -27,11 +24,8 @@ import {
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import CartItem from './CartItem';
-<<<<<<< HEAD
 
-=======
 import Paypal from './Paypal';
->>>>>>> paypal
 export default function NavbarL(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
@@ -169,18 +163,6 @@ export default function NavbarL(props) {
                           emptyCart();
                         }
                       });
-
-                <Button
-                  color="blue"
-                  onClick={() => {
-                    toast({
-                      title: 'Purchased!',
-                      description: `You purchased $${total} worth of grocieries.`,
-                      status: 'error',
-                      duration: 5000,
-                      isClosable: true,
-                    });
-                    emptyCart();
                   }}
                 >
                   Checkout

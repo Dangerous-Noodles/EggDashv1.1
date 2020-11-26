@@ -53,23 +53,23 @@ export default function LogIn({ loggedIn }) {
     return toReturn;
   }
 
-//   function verifiedWGoogle() {
-//    console.log('verified with google start')
-//  fetch('/cust/google').then(response=>{
-//    if (response.status===200) return response.json()
-//  }).then(responseJson => {
-//   setState({
-//     ...state,
-//     verified: true,
-//     email: username,
-//   });
-//  }).catch((err)=>{
-//   setState({
-//     ...state,
-//     verified: false,
-//   });
-//  })
-//  }
+  //   function verifiedWGoogle() {
+  //    console.log('verified with google start')
+  //  fetch('/cust/google').then(response=>{
+  //    if (response.status===200) return response.json()
+  //  }).then(responseJson => {
+  //   setState({
+  //     ...state,
+  //     verified: true,
+  //     email: username,
+  //   });
+  //  }).catch((err)=>{
+  //   setState({
+  //     ...state,
+  //     verified: false,
+  //   });
+  //  })
+  //  }
   const toast = useToast();
   return (
     <Container maxW="max" maxH="max">
@@ -137,36 +137,21 @@ export default function LogIn({ loggedIn }) {
             >
               Sign In
             </Button>
-<<<<<<< HEAD
-            </Link>
-          
-            <Button mt="30px"
-              mb="30px"
-              width="sm"
-              onClick={() => { window.location.href = '/cust/google' } } > Google 
-              </Button>
-
-             
-
-
-=======
-
-            <Button
-              mt="30px"
-              mb="30px"
-              width="sm"
-              onClick={() => {
-                window.location.href = '/cust/google';
-              }}
-            >
-              Google{' '}
-            </Button>
           </Link>
->>>>>>> paypal
+
+          <Button
+            mt="30px"
+            mb="30px"
+            width="sm"
+            onClick={() => {
+              window.location.href = '/cust/google';
+            }}
+          >
+            {' '}
+            Google
+          </Button>
         </Flex>
       </Center>
     </Container>
   );
 }
-
-
